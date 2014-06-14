@@ -34,6 +34,7 @@ public class CuadranteBarrioController {
     List<CuadranteBarrio> listCuadranteBarrio = new ArrayList<CuadranteBarrio>();
     CuadranteBarrio cuadranteBarrioActual = new CuadranteBarrio();
     private boolean viewMapa = false;
+    private boolean viewMapServer =false;
     private double lat = -0.2081351689;
     private double lon = -78.500241931;
     private MapModel simpleModel;
@@ -68,6 +69,15 @@ public class CuadranteBarrioController {
 
     public void cerrarMapa() {
         viewMapa = false;
+    }
+    
+    public void verMapServer()
+    {
+        viewMapServer=true;
+    }
+    public void cerrarMapServer()
+    {
+        viewMapServer=false;
     }
 
     public void transformarCuadrante(CuadranteBarrio cuadranteBarrio) {
@@ -164,6 +174,14 @@ public class CuadranteBarrioController {
 
     public void setRutaURL(String rutaURL) {
         this.rutaURL = rutaURL;
+    }
+
+    public boolean isViewMapServer() {
+        return viewMapServer;
+    }
+
+    public void setViewMapServer(boolean viewMapServer) {
+        this.viewMapServer = viewMapServer;
     }
     
 

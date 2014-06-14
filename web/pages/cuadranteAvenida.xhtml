@@ -60,6 +60,13 @@
                                            update=":formCuadranteAvenida:gmapDialog"/>
                         </center>
                     </p:column>
+                    <p:column headerText="Maps Server" style="width: 30px;">
+                        <center>
+                            <p:commandLink styleClass="ui-icon ui-icon-extlink"
+                                           action="#{cuadranteAvenidaController.verMapServer()}"
+                                           update=":formCuadranteAvenida:paneMapServer"/>
+                        </center>
+                    </p:column>
 
                 </p:dataTable>
             </p:panel>
@@ -82,6 +89,25 @@
                 <p:commandButton value="Cerrar" update="gmapDialog" style="float: right;"
                                  action="#{cuadranteAvenidaController.cerrarMapa()}"/>
 
+            </p:dialog>
+            
+            <p:dialog id="paneMapServer" closable="false"
+                      closeOnEscape="false" modal="false" header="Maps Server"
+                      resizable="false" width="auto" height="auto"
+                      visible="#{cuadranteAvenidaController.viewMapServer}">
+                <table style="width: 100%;">
+                    <tr>
+                        <td><object id="embedded"                                    
+                                    data="#{cuadranteAvenidaController.rutaURL}"
+                                    width="800"
+                                    height="500" /></td>
+                    </tr>
+                </table>
+                <br></br>
+                <div style="float: right;">
+                    <p:commandButton value="cerrar" action="#{cuadranteAvenidaController.cerrarMapServer()}"
+                                     update="paneMapServer"/>
+                </div>
             </p:dialog>
         </h:form>
     </ui:define>

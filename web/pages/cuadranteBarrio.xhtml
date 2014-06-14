@@ -56,11 +56,18 @@
                     <p:column headerText="Cuadrante">
                         #{item.idCuadrante.codigoCuadrante}
                     </p:column>
-                    <p:column headerText="Ver mapa" style="width: 30px;">
+                    <p:column headerText="Google maps" style="width: 30px;">
                         <center>
                             <p:commandLink styleClass="ui-icon ui-icon-extlink"
                                            action="#{cuadranteBarrioController.verMapa(item)}"
                                            update=":formCuadranteBarrio:gmapDialog"/>
+                        </center>
+                    </p:column>
+                    <p:column headerText="Maps Server" style="width: 30px;">
+                        <center>
+                            <p:commandLink styleClass="ui-icon ui-icon-extlink"
+                                           action="#{cuadranteBarrioController.verMapServer()}"
+                                           update=":formCuadranteBarrio:paneMapServer"/>
                         </center>
                     </p:column>
 
@@ -90,7 +97,7 @@
             <p:dialog id="paneMapServer" closable="false"
                       closeOnEscape="false" modal="false" header="Maps Server"
                       resizable="false" width="auto" height="auto"
-                      visible="true">
+                      visible="#{cuadranteBarrioController.viewMapServer}">
                 <table style="width: 100%;">
                     <tr>
                         <td><object id="embedded"                                    
@@ -101,8 +108,8 @@
                 </table>
                 <br></br>
                 <div style="float: right;">
-                    <p:commandButton value="cerrar"
-                                     />
+                    <p:commandButton value="cerrar" action="#{cuadranteBarrioController.cerrarMapServer()}"
+                                     update="paneMapServer"/>
                 </div>
             </p:dialog>
 

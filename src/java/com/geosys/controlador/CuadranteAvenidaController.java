@@ -36,10 +36,12 @@ public class CuadranteAvenidaController {
     CuadranteAvenida cuadranteAvenidaActual = new CuadranteAvenida();
     
     private boolean viewMapa = false;
+    private boolean viewMapServer =false;
     private double lat = -0.2081351689;
     private double lon = -78.500241931;
     private MapModel simpleModel;
     private String nombreBuscar="";
+    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?layer=lakespy2&layer=dlgstln2&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&map=%2Fvar%2Flib%2Ftomcat7%2Fmapserver%2Fapps%2Fmapserv-demo%2FROOT%2Fitasca.map&program=%2Fcgi-bin%2Fmapserv&root=%2Fmapserv-demo&template=itasca_basic.html";
     
     @PostConstruct
     public void Init()
@@ -68,6 +70,14 @@ public class CuadranteAvenidaController {
 
     public void cerrarMapa() {
         viewMapa = false;
+    }
+    public void verMapServer()
+    {
+        viewMapServer=true;
+    }
+    public void cerrarMapServer()
+    {
+        viewMapServer=false;
     }
 
     public void transformarCuadrante(CuadranteAvenida cuadranteAvenida) {
@@ -159,5 +169,22 @@ public class CuadranteAvenidaController {
     public void setNombreBuscar(String nombreBuscar) {
         this.nombreBuscar = nombreBuscar;
     }
+
+    public boolean isViewMapServer() {
+        return viewMapServer;
+    }
+
+    public void setViewMapServer(boolean viewMapServer) {
+        this.viewMapServer = viewMapServer;
+    }
+
+    public String getRutaURL() {
+        return rutaURL;
+    }
+
+    public void setRutaURL(String rutaURL) {
+        this.rutaURL = rutaURL;
+    }
+    
     
 }
