@@ -21,7 +21,10 @@
                             <p:inputText id="txtNombreBuscar"
                                          style="margin-right:10px; margin-bottom: -10px; width:350px;"
                                          value="#{cuadranteBarrioController.nombreBuscar}"
-                                         onkeypress="if (event.keyCode == 13) {test(); return false;}"/>
+                                         onkeypress="if (event.keyCode == 13) {
+                                                     test();
+                                                     return false;
+                                                 }"/>
                         </td>
                         <p:watermark for="txtNombreBuscar"
                                      value="Ingrese un nombre de barrio o cuadrante" />
@@ -83,6 +86,27 @@
                                  action="#{cuadranteBarrioController.cerrarMapa()}"/>
 
             </p:dialog>
+
+            <p:dialog id="paneMapServer" closable="false"
+                      closeOnEscape="false" modal="false" header="Maps Server"
+                      resizable="false" width="auto" height="auto"
+                      visible="true">
+                <table style="width: 100%;">
+                    <tr>
+                        <td><object id="embedded"                                    
+                                    data="#{cuadranteBarrioController.rutaURL}"
+                                    width="800"
+                                    height="500" /></td>
+                    </tr>
+                </table>
+                <br></br>
+                <div style="float: right;">
+                    <p:commandButton value="cerrar"
+                                     />
+                </div>
+            </p:dialog>
+
+
         </h:form>
     </ui:define>
 </ui:composition>

@@ -38,6 +38,7 @@ public class CuadranteBarrioController {
     private double lon = -78.500241931;
     private MapModel simpleModel;
     private String nombreBuscar="";
+    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?layer=lakespy2&layer=dlgstln2&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&map=%2Fvar%2Flib%2Ftomcat7%2Fmapserver%2Fapps%2Fmapserv-demo%2FROOT%2Fitasca.map&program=%2Fcgi-bin%2Fmapserv&root=%2Fmapserv-demo&template=itasca_basic.html";
 
     
     @PostConstruct
@@ -156,5 +157,14 @@ public class CuadranteBarrioController {
     public void setNombreBuscar(String nombreBuscar) {
         this.nombreBuscar = nombreBuscar;
     }
+
+    public String getRutaURL() {
+        return rutaURL;
+    }
+
+    public void setRutaURL(String rutaURL) {
+        this.rutaURL = rutaURL;
+    }
+    
 
 }
