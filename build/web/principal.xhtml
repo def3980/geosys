@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>#{empty pageTitle ? 'GeoSys 2.0' : pageTitle}</title>
+        <link rel="shortcut icon" href="#{request.contextPath}/resources/suia_encegrep.png"/>	
+        <h:outputStylesheet name="css/bootstrap.css" />
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </h:head>
+    <h:body>
+
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="174" resizable="false" 
+                          closable="false" collapsible="false">
+                <ui:include src="header.xhtml" />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="200" header="Ocultar"
+                          collapsible="true">				
+                <h:form>
+                    <p:menu>                         
+                        <p:submenu label="Sesión">
+                            <p:menuitem value="Cerrar Sesión" action="#{login.cerrar()}" />
+                        </p:submenu>
+                    </p:menu>
+                    <p:menu model="#{menu.menu(login.tipo)}"></p:menu>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <p:ajaxStatus style="display:block; margin-bottom:2em; height:24px; position: fixed; right: 50%; bottom: 50%">
+                    <f:facet name="start">
+                        <p:graphicImage name="/images/ajax-loader2.gif" />
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value="" />
+                    </f:facet>
+                </p:ajaxStatus>
+
+                <ui:insert name="main" />
+
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>

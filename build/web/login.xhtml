@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/pageLogin.xhtml">	
+    <ui:define name="main">	
+        <style type="text/css">
+            .centrar
+            {
+                position: absolute;
+                top:50%;
+                left:50%;
+                width:400px;
+                margin-left:-200px;
+                height:300px;
+                margin-top:-150px;
+            }
+            .div-contenedor
+            {
+                border: 2px solid #5bc0de; 
+                width: 400px; padding: 5px; margin: 0 auto;
+                -webkit-border-radius: 5px 5px 5px 5px;
+                border-radius: 5px 5px 5px 5px;
+                -webkit-box-shadow: 1px 1px 30px 5px #5bc0de;
+                box-shadow: 1px 1px 30px 5px #5bc0de;
+            }
+        </style>
+        <h:form id="formRegister">			
+            <div class="centrar">
+                <div class="div-contenedor">
+                    <center>
+                        <span style="font-weight: bold; font-size: 12px;">GeoSys 2.0</span>
+                    </center>
+                    <center>		 
+                        <br />
+                        <h5> Ingreso al Sistema </h5>
+                        <br />
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="padding-right: 20px;">Usuario:</td>
+                                    <td><p:inputText value="#{login.usuario}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Contraseña:</td>
+                                    <td><p:password value="#{login.clave}" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">
+                                        <p:commandButton value="Acceder" icon="ui-icon-unlocked"
+                                                         action="#{login.acceder()}" update="formRegister"/>
+                                    </td>							
+                                </tr>							
+                                <tr>
+                                    <td colspan="2">
+                                        <p:messages id="messages">
+                                            <p:effect type="fade" event="load" delay="3000" />
+                                        </p:messages>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </div>	
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

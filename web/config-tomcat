@@ -1,0 +1,10 @@
+configurar el usuario Tomcat -------------------------------------------
+
+agregar el usuario en el archivo  tomcat-users.xml
+
+/home/walter/apache-tomcat-7.0.41/conf/tomcat-users.xml
+
+
+<user username="geosys" password="geosys" roles="manager-script,admin"/>
+
+------------------------------------------------------------------------

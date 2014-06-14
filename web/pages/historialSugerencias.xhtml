@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/principal.xhtml">
+
+    <ui:param name="pageTitle" value="GeoSys 2.0" />
+   
+    <ui:define name="main">        
+        
+        <h:form id="formHistorialSugerencia" prependId="false">
+            <p:commandButton value="Refrescar" action="#{sugerenciaController.cargarSugerencias()}"
+                             update="tableHistorialSugerencias"/>
+            <p:panel style="margin-top:10px">
+                <f:facet name="header">
+                    Historial de sugerencias
+                </f:facet>
+                <p:dataTable  id="tableHistorialSugerencias"
+                              value="#{sugerenciaController.listaSugerencias}" 
+                              var="item" rows="10"
+                              paginator="true"
+                              paginatorPosition="bottom">
+                    <p:column headerText="Fecha" style="width: 10%">
+                        #{item.fecha}
+                    </p:column>
+                    <p:column headerText="Descripción">
+                        #{item.descripcion}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

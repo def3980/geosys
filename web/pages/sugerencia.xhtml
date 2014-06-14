@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/principal.xhtml">
+
+    <ui:param name="pageTitle" value="GeoSys 2.0" />
+    <ui:define name="main">	
+        <h:form id="formSugerencia" prependId="false">         
+            <p:panelGrid id="panelGridSugerencia" style="margin-top:20px">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="2">Sugerencias</p:column>
+                    </p:row>
+                </f:facet>
+
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="Fecha"/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{sugerenciaController.fecha}"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="Sugerencia" />
+                    </p:column>
+                    <p:column>
+                        <p:inputTextarea autoResize="false" maxlength="200" style="width: 350px" 
+                                         rows="5"
+                                         value="#{sugerenciaController.sugerenciaActual.descripcion}"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column colspan="2" styleClass="ui-widget-header" style="text-align: center;">
+                        <p:commandButton value="Guardar" action="#{sugerenciaController.validar()}"
+                                         update="panelGridSugerencia,messages"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="2">
+                        <p:messages id="messages">
+                            <p:effect type="fade" event="load" delay="3000" />
+                        </p:messages>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

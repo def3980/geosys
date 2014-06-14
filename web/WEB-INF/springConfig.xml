@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/security
+                http://www.springframework.org/schema/security/spring-security-2.0.2.xsd">
+
+    <security:http auto-config="true"
+    access-denied-page="/login.xhtml" >
+        <security:intercept-url
+			pattern="/login.xhtml"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url access="ROLE_URLACCESS" pattern="/pages/**"/>
+        <security:form-login login-page="/login.xhtml"
+                             default-target-url="/pages/presentacion.xhtml"
+                             authentication-failure-url="/login.xhtml"
+                             always-use-default-target="true"/>
+        <security:logout  logout-success-url="/login.xhtml" />
+        <security:concurrent-session-control   max-sessions="1"   expired-url="/login.xhtml?sessionInvaild=true"  />
+    </security:http> 
+           
+   <security:authentication-provider  user-service-ref="userDetailsService"/>    
+    <bean class="com.geosys.util.UserDetailsServiceImpl" id="userDetailsService">
+        <constructor-arg ref="userRepository"/>
+    </bean>
+    <bean class="com.geosys.util.UserDaoImpl" id="userRepository"/>
+
+</beans>

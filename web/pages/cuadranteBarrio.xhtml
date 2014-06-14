@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/principal.xhtml">
+
+    <ui:param name="pageTitle" value="GeoSys 2.0" />	
+    <ui:define name="main">	
+        <h:form id="formCuadranteBarrio" prependId="false">
+
+            <p:panel style="margin-bottom: 5px;">
+                <table style="width: 100%; margin: -5px -5px -5px -5px;">
+                    <tr>
+                        <td style="float: right;">
+                            <p:remoteCommand name="test"
+                                             actionListener="#{cuadranteBarrioController.carga()}"
+                                             update="tableCuadranteBarrio" /> 
+                            <p:inputText id="txtNombreBuscar"
+                                         style="margin-right:10px; margin-bottom: -10px; width:350px;"
+                                         value="#{cuadranteBarrioController.nombreBuscar}"
+                                         onkeypress="if (event.keyCode == 13) {test(); return false;}"/>
+                        </td>
+                        <p:watermark for="txtNombreBuscar"
+                                     value="Ingrese un nombre de barrio o cuadrante" />
+                        <td style="width: 10%;">
+                            <p:commandButton
+                                style="float: right;" value="Buscar" icon="ui-icon-search"
+                                action="#{cuadranteBarrioController.carga()}" update="tableCuadranteBarrio" />
+                        </td>
+                    </tr>
+                </table>
+            </p:panel>
+
+            <p:panel style="margin-top:10px">
+                <f:facet name="header">
+                    Barrios y Cuadrantes
+                </f:facet>
+                <p:dataTable  id="tableCuadranteBarrio" styleClass="data-table"
+                              value="#{cuadranteBarrioController.listCuadranteBarrio}" 
+                              var="item" rows="10"
+                              paginator="true"
+                              emptyMessage="No existen registros"
+                              paginatorPosition="bottom">
+                    <p:column headerText="ID">
+                        #{item.idCuadraBarrio}
+                    </p:column>
+                    <p:column headerText="Barrio">
+                        #{item.idBarrio.nombreBarrio}
+                    </p:column>
+                    <p:column headerText="Cuadrante">
+                        #{item.idCuadrante.codigoCuadrante}
+                    </p:column>
+                    <p:column headerText="Ver mapa" style="width: 30px;">
+                        <center>
+                            <p:commandLink styleClass="ui-icon ui-icon-extlink"
+                                           action="#{cuadranteBarrioController.verMapa(item)}"
+                                           update=":formCuadranteBarrio:gmapDialog"/>
+                        </center>
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+
+            <p:dialog id="gmapDialog" visible="#{cuadranteBarrioController.viewMapa}" 
+                      width="auto" height="auto" closable="false" closeOnEscape="false"
+                      resizable="false" modal="false">                
+                <p:gmap center="#{cuadranteBarrioController.lat}, #{cuadranteBarrioController.lon}" 
+                        zoom="15" type="map" style="width:800px;height:400px"
+                        model="#{cuadranteBarrioController.simpleModel}"/>                
+                <br></br>
+                <p:panelGrid columns="2" style="float: left;">
+                    <p:outputLabel value="Barrio :"/>
+                    #{cuadranteBarrioController.cuadranteBarrioActual.idBarrio.nombreBarrio}
+
+                    <p:outputLabel value="Cuadrante :"/>
+                    #{cuadranteBarrioController.cuadranteBarrioActual.idCuadrante.codigoCuadrante}
+                </p:panelGrid>
+                <br></br>
+                <p:commandButton value="Cerrar" update="gmapDialog" style="float: right;"
+                                 action="#{cuadranteBarrioController.cerrarMapa()}"/>
+
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

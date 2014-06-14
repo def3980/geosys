@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/principal.xhtml">
+
+    <ui:param name="pageTitle" value="GeoSys 2.0" />	
+    <ui:define name="main">
+        <h:form id="formUsuarios" prependId="false">
+
+            <table style="width: 100%;">
+                <tr>
+                    <td style="vertical-align: top;">
+                        <p:panelGrid id="panelGridUsuarios">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="2">Crear Usuario</p:column>
+                                </p:row>
+                            </f:facet>
+
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="Apellidos y Nombres."/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText value="#{usuarioController.usuarioActual.nombresUsuario}"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="Usuario." />
+                                </p:column>
+                                <p:column>
+                                    <p:inputText value="#{usuarioController.usuarioActual.usuario}"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="Clave." />
+                                </p:column>
+                                <p:column>
+                                    <p:password value="#{usuarioController.passwd}" />
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="Tipo de Usuario." />
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu value="#{usuarioController.usuarioActual.tipoUsuario}">
+                                        <f:selectItem itemValue="1" itemLabel="Adminstrador"/>
+                                        <f:selectItem itemValue="2" itemLabel="Usuario"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>                                
+                                <p:column colspan="2" styleClass="ui-widget-header" style="text-align: center;">
+                                    <p:commandButton value="Nuevo" update="panelGridUsuarios"
+                                                     action="#{usuarioController.nuevo()}"/>
+                                    <p:commandButton value="Guardar" update="panelGridUsuarios,tableUsuarios,messages"
+                                                     action="#{usuarioController.validar()}"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column colspan="2">
+                                    <p:messages id="messages">
+                                        <p:effect type="fade" event="load" delay="3000" />
+                                    </p:messages>
+                                </p:column>
+                            </p:row>
+
+                        </p:panelGrid>
+
+                    </td>
+                    <td style="vertical-align: top;">
+                        <p:dataTable  id="tableUsuarios"
+                                      value="#{usuarioController.listaUsuario}" 
+                                      var="item" rows="10"
+                                      paginator="true"
+                                      paginatorPosition="bottom">
+                            <p:column headerText="Apellidos y Nombres" >
+                                <p:commandLink value="#{item.nombresUsuario}" 
+                                               style="font-weight: bold;"
+                                               action="#{usuarioController.editar(item)}"
+                                               update=":formUsuarios:panelGridUsuarios"/>                                
+                            </p:column>
+                            <p:column headerText="Usuario">
+                                #{item.usuario}
+                            </p:column>
+                            <p:column headerText="Clave">
+                                #{item.clave}
+                            </p:column>
+                        </p:dataTable>
+                    </td>
+                </tr>
+            </table>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
