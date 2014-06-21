@@ -39,7 +39,8 @@ public class CuadranteBarrioController {
     private double lon = -78.500241931;
     private MapModel simpleModel;
     private String nombreBuscar="";
-    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?layer=lakespy2&layer=dlgstln2&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&map=%2Fvar%2Flib%2Ftomcat7%2Fmapserver%2Fapps%2Fmapserv-demo%2FROOT%2Fitasca.map&program=%2Fcgi-bin%2Fmapserv&root=%2Fmapserv-demo&template=itasca_basic.html";
+//    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?layer=lakespy2&layer=dlgstln2&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&map=%2Fvar%2Flib%2Ftomcat7%2Fmapserver%2Fapps%2Fmapserv-demo%2FROOT%2Fitasca.map&program=%2Fcgi-bin%2Fmapserv&root=%2Fmapserv-demo&template=itasca_basic.html";
+    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer=dlgstln2&layer=lakespy2&zoomdir=-1&zoomsize=5&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=388107.634400+5200287.742790+500896.339020+5313076.447409&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";
 
     
     @PostConstruct
