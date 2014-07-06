@@ -66,7 +66,7 @@
                     <p:column headerText="Maps Server" style="width: 30px;">
                         <center>
                             <p:commandLink styleClass="ui-icon ui-icon-extlink"
-                                           action="#{cuadranteBarrioController.verMapServer()}"
+                                           action="#{cuadranteBarrioController.verMapServer(item)}"
                                            update=":formCuadranteBarrio:paneMapServer"/>
                         </center>
                     </p:column>
@@ -104,6 +104,10 @@
                                     data="#{cuadranteBarrioController.rutaURL}"
                                     width="800"
                                     height="500" /></td>
+                    </tr>
+                    <tr>
+                        <p:inputText value="#{cuadranteBarrioController.zoom}"/>
+                        <p:commandButton value="Zoom" update="paneMapServer" action="#{cuadranteBarrioController.cargaRuta()}"/>
                     </tr>
                 </table>
                 <br></br>

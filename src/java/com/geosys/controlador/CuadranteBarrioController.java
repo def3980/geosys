@@ -34,21 +34,20 @@ public class CuadranteBarrioController {
     List<CuadranteBarrio> listCuadranteBarrio = new ArrayList<CuadranteBarrio>();
     CuadranteBarrio cuadranteBarrioActual = new CuadranteBarrio();
     private boolean viewMapa = false;
-    private boolean viewMapServer =false;
+    private boolean viewMapServer = false;
     private double lat = -0.2081351689;
     private double lon = -78.500241931;
     private MapModel simpleModel;
-    private String nombreBuscar="";
+    private String nombreBuscar = "";
+    private String zoom="0";
 //    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?layer=lakespy2&layer=dlgstln2&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&map=%2Fvar%2Flib%2Ftomcat7%2Fmapserver%2Fapps%2Fmapserv-demo%2FROOT%2Fitasca.map&program=%2Fcgi-bin%2Fmapserv&root=%2Fmapserv-demo&template=itasca_basic.html";
-    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer=dlgstln2&layer=lakespy2&zoomdir=-1&zoomsize=5&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=388107.634400+5200287.742790+500896.339020+5313076.447409&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";
+    private String rutaURL;
 
-    
     @PostConstruct
-    public void Init()
-    {
+    public void Init() {
         carga();
     }
-    
+
     public void carga() {
         javax.persistence.Query q = em.createQuery("SELECT c FROM CuadranteBarrio c "
                 + "WHERE (UPPER(c.idBarrio.nombreBarrio) like :nombre "
@@ -71,14 +70,15 @@ public class CuadranteBarrioController {
     public void cerrarMapa() {
         viewMapa = false;
     }
-    
-    public void verMapServer()
-    {
-        viewMapServer=true;
+
+    public void verMapServer(CuadranteBarrio c) {
+        viewMapServer = true;
+        cuadranteBarrioActual=c;
+        cargaRuta();
     }
-    public void cerrarMapServer()
-    {
-        viewMapServer=false;
+
+    public void cerrarMapServer() {
+        viewMapServer = false;
     }
 
     public void transformarCuadrante(CuadranteBarrio cuadranteBarrio) {
@@ -94,6 +94,11 @@ public class CuadranteBarrioController {
         simpleModel.addOverlay(new Marker(coord1, "Barrio: " + cuadranteBarrio.getIdBarrio().getNombreBarrio() + " -- " + cuadranteBarrio.getIdCuadrante().getCodigoCuadrante()));
         cuadranteBarrioActual = cuadranteBarrio;
 
+    }
+    public void cargaRuta()
+    {
+        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir="+zoom+"&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=768356.63+9955855.26+790107.69+10004030.80&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";        
+//        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir="+zoom+"&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=776209.96+9969945.73+779521.35+9971944.75&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";        
     }
 
 //    getter and setter----------------------------------------------------------
@@ -184,6 +189,13 @@ public class CuadranteBarrioController {
     public void setViewMapServer(boolean viewMapServer) {
         this.viewMapServer = viewMapServer;
     }
-    
+
+    public String getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(String zoom) {
+        this.zoom = zoom;
+    }
 
 }

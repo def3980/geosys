@@ -1,0 +1,120 @@
+MAP
+  NAME ITASCA
+  STATUS ON
+  SIZE 700 400
+  EXTENT  768356.63 9955855.26 790107.69 10004030.80 #Capa de Quito
+  UNITS METERS
+  SHAPEPATH "data"
+  IMAGECOLOR 255 255 255
+  TEMPLATEPATTERN "itasca"
+  
+  IMAGETYPE PNG
+  
+
+  SYMBOL
+    NAME 'circle'
+    TYPE ELLIPSE
+    POINTS 1 1 END
+    FILLED TRUE
+  END
+  
+  SYMBOL
+    NAME 'star'
+    TYPE VECTOR
+    FILLED TRUE
+    POINTS
+      0 .375
+      .35 .375
+      .5 0
+      .65 .375
+      1 .375
+      .75 .625
+      .875 1
+      .5 .75
+      .125 1
+      .25 .625
+    END
+  END 
+
+
+  WEB
+    HEADER templates/header.html
+    TEMPLATE "set in index.html"
+    FOOTER templates/footer.html    
+    MINSCALE 1000
+    MAXSCALE 1550000
+
+    # change the next two lines to match your setup
+    IMAGEPATH "/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/tmp/" 
+    IMAGEURL "/tmp/"
+
+    METADATA
+      WMS_TITLE "UMN MapServer Itasca Demo"
+      WMS_ABSTRACT "This is a UMN MapServer application for Itasca County located in north central Minnesota."
+      WMS_ACCESSCONSTRAINTS "none"
+
+      # change this value to match your setup
+      WMS_ONLINERESOURCE "http://localhost.localdomain/mapserver_demos/itasca/index.html"
+
+      WMS_SRS "EPSG:32717"
+    END
+  END
+
+  #
+  # Start of layer definitions
+  #
+ 
+ LAYER
+    NAME Quito
+    TYPE POLYGON
+    STATUS DEFAULT
+    DATA Quito
+
+    CLASSITEM 'nombre'
+    CLASS
+      EXPRESSION 'Itasca'
+      STYLE
+        OUTLINECOLOR 128 128 128
+        COLOR 225 225 185
+      END
+    END
+    CLASS # every other county in the state
+      EXPRESSION /./ 
+       STYLE 
+        OUTLINECOLOR 128 128 128
+        COLOR 255 255 255
+      END
+    END
+  END
+  
+
+  LAYER
+    NAME C5
+    TYPE POLYGON
+    STATUS OFF
+    DATA C5
+
+    CLASS
+      NAME 'Lakes & Rivers'
+      TEMPLATE "templates/lakespy2.html"
+      STYLE
+	OUTLINECOLOR 128 128 128
+        COLOR 49 117 185
+      END
+    END
+
+    HEADER "templates/lakespy2_header.html"
+    FOOTER "templates/lakespy2_footer.html"
+    
+    TOLERANCE 3
+
+    DUMP TRUE # allow GML export
+
+    METADATA
+      WMS_TITLE "Lakes and Rivers"
+      WMS_ABSTRACT "DLG lake and river polygons for Itasca County. See http://deli.dnr.state.mn.us/metadata/full/dlglkpy2.html for more information."
+      WMS_SRS "EPSG:32717"
+    END
+  END
+
+END # Map File
