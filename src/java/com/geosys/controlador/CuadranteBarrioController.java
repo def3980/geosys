@@ -39,7 +39,7 @@ public class CuadranteBarrioController {
     private double lon = -78.500241931;
     private MapModel simpleModel;
     private String nombreBuscar = "";
-    private String zoom="0";
+    private String zoom="3";
 //    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?layer=lakespy2&layer=dlgstln2&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&map=%2Fvar%2Flib%2Ftomcat7%2Fmapserver%2Fapps%2Fmapserv-demo%2FROOT%2Fitasca.map&program=%2Fcgi-bin%2Fmapserv&root=%2Fmapserv-demo&template=itasca_basic.html";
     private String rutaURL;
 
@@ -97,8 +97,8 @@ public class CuadranteBarrioController {
     }
     public void cargaRuta()
     {
-        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir="+zoom+"&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=768356.63+9955855.26+790107.69+10004030.80&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";        
-//        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir="+zoom+"&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=776209.96+9969945.73+779521.35+9971944.75&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";        
+        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir=-1&zoomsize="+zoom+"&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=-8734047.92+-26422.1+-8728479.30+-19893.4&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";        
+//        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir="+zoom+"&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=776209.96+9969945.73+779521.35+9971944.75&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";
     }
 
 //    getter and setter----------------------------------------------------------

@@ -36,7 +36,7 @@
                     </tr>
                 </table>
             </p:panel>
-            <p:commandButton value="Mapa" action="#{crearArchivoMap.cargaArchivo()}"/>
+            <p:commandButton value="Generar Archivo" action="#{crearArchivoMap.cargaArchivo()}"/>
             <p:panel style="margin-top:10px">
                 <f:facet name="header">
                     Barrios y Cuadrantes
@@ -103,14 +103,19 @@
                         <td><object id="embedded"                                    
                                     data="#{cuadranteBarrioController.rutaURL}"
                                     width="800"
-                                    height="500" /></td>
+                                    height="450" /></td>
                     </tr>
-                    <tr>
-                        <p:inputText value="#{cuadranteBarrioController.zoom}"/>
-                        <p:commandButton value="Zoom" update="paneMapServer" action="#{cuadranteBarrioController.cargaRuta()}"/>
-                    </tr>
+
                 </table>
-                <br></br>
+                <p:panelGrid columns="2" style="float: left;">
+                    <p:inputText value="#{cuadranteBarrioController.zoom}"/>
+                    <p:commandButton value="Zoom" update="paneMapServer" action="#{cuadranteBarrioController.cargaRuta()}"/>
+                    <p:outputLabel value="Barrio :"/>
+                    #{cuadranteBarrioController.cuadranteBarrioActual.idBarrio.nombreBarrio}
+
+                    <p:outputLabel value="Cuadrante :"/>
+                    #{cuadranteBarrioController.cuadranteBarrioActual.idCuadrante.codigoCuadrante}
+                </p:panelGrid>
                 <div style="float: right;">
                     <p:commandButton value="cerrar" action="#{cuadranteBarrioController.cerrarMapServer()}"
                                      update="paneMapServer"/>
