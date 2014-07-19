@@ -7,9 +7,8 @@
 package com.geosys.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,7 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cuadrante.findAll", query = "SELECT c FROM Cuadrante c"),
     @NamedQuery(name = "Cuadrante.findByIdCuadrante", query = "SELECT c FROM Cuadrante c WHERE c.idCuadrante = :idCuadrante"),
-    @NamedQuery(name = "Cuadrante.findByCodigoCuadrante", query = "SELECT c FROM Cuadrante c WHERE c.codigoCuadrante = :codigoCuadrante")})
+    @NamedQuery(name = "Cuadrante.findByCodigoCuadrante", query = "SELECT c FROM Cuadrante c WHERE c.codigoCuadrante = :codigoCuadrante"),
+    @NamedQuery(name = "Cuadrante.findByPuntoX", query = "SELECT c FROM Cuadrante c WHERE c.puntoX = :puntoX"),
+    @NamedQuery(name = "Cuadrante.findByPuntoY", query = "SELECT c FROM Cuadrante c WHERE c.puntoY = :puntoY")})
 public class Cuadrante implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,12 +44,11 @@ public class Cuadrante implements Serializable {
     @Basic(optional = false)
     @Column(name = "codigo_cuadrante")
     private String codigoCuadrante;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCuadrante")
-    private List<CuadranteBarrio> cuadranteBarrioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCuadrante")
-    private List<LugarCuadrante> lugarCuadranteList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCuadrante")
-    private List<CuadranteAvenida> cuadranteAvenidaList;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "punto_x")
+    private BigDecimal puntoX;
+    @Column(name = "punto_y")
+    private BigDecimal puntoY;
     @JoinColumn(name = "id_zona", referencedColumnName = "id_zona")
     @ManyToOne(optional = false)
     private Zonas idZona;
@@ -83,31 +81,20 @@ public class Cuadrante implements Serializable {
         this.codigoCuadrante = codigoCuadrante;
     }
 
-    @XmlTransient
-    public List<CuadranteBarrio> getCuadranteBarrioList() {
-        return cuadranteBarrioList;
+    public BigDecimal getPuntoX() {
+        return puntoX;
     }
 
-    public void setCuadranteBarrioList(List<CuadranteBarrio> cuadranteBarrioList) {
-        this.cuadranteBarrioList = cuadranteBarrioList;
+    public void setPuntoX(BigDecimal puntoX) {
+        this.puntoX = puntoX;
     }
 
-    @XmlTransient
-    public List<LugarCuadrante> getLugarCuadranteList() {
-        return lugarCuadranteList;
+    public BigDecimal getPuntoY() {
+        return puntoY;
     }
 
-    public void setLugarCuadranteList(List<LugarCuadrante> lugarCuadranteList) {
-        this.lugarCuadranteList = lugarCuadranteList;
-    }
-
-    @XmlTransient
-    public List<CuadranteAvenida> getCuadranteAvenidaList() {
-        return cuadranteAvenidaList;
-    }
-
-    public void setCuadranteAvenidaList(List<CuadranteAvenida> cuadranteAvenidaList) {
-        this.cuadranteAvenidaList = cuadranteAvenidaList;
+    public void setPuntoY(BigDecimal puntoY) {
+        this.puntoY = puntoY;
     }
 
     public Zonas getIdZona() {

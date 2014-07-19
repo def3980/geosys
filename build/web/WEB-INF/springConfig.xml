@@ -15,7 +15,7 @@
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url access="ROLE_URLACCESS" pattern="/pages/**"/>
         <security:form-login login-page="/login.xhtml"
-                             default-target-url="/pages/presentacion.xhtml"
+                             default-target-url="/pages/cuadranteBarrio.xhtml"
                              authentication-failure-url="/login.xhtml"
                              always-use-default-target="true"/>
         <security:logout  logout-success-url="/login.xhtml" />

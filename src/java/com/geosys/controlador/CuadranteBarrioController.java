@@ -7,6 +7,7 @@ package com.geosys.controlador;
 
 import com.geosys.model.CuadranteBarrio;
 import com.geosys.util.CuadrantesCoordenadas;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -39,7 +40,7 @@ public class CuadranteBarrioController {
     private double lon = -78.500241931;
     private MapModel simpleModel;
     private String nombreBuscar = "";
-    private String zoom="3";
+    private String zoom = "3";
 //    private String rutaURL="http://itasca.tesis:8080/cgi-bin/mapserv?layer=lakespy2&layer=dlgstln2&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&map=%2Fvar%2Flib%2Ftomcat7%2Fmapserver%2Fapps%2Fmapserv-demo%2FROOT%2Fitasca.map&program=%2Fcgi-bin%2Fmapserv&root=%2Fmapserv-demo&template=itasca_basic.html";
     private String rutaURL;
 
@@ -73,7 +74,7 @@ public class CuadranteBarrioController {
 
     public void verMapServer(CuadranteBarrio c) {
         viewMapServer = true;
-        cuadranteBarrioActual=c;
+        cuadranteBarrioActual = c;
         cargaRuta();
     }
 
@@ -95,9 +96,18 @@ public class CuadranteBarrioController {
         cuadranteBarrioActual = cuadranteBarrio;
 
     }
-    public void cargaRuta()
-    {
-        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir=-1&zoomsize="+zoom+"&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=-8734047.92+-26422.1+-8728479.30+-19893.4&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";        
+
+    public void cargaRuta() {
+        BigDecimal x = cuadranteBarrioActual.getIdCuadrante().getPuntoX();
+        BigDecimal y = cuadranteBarrioActual.getIdCuadrante().getPuntoY();
+        BigDecimal val = new BigDecimal("500");
+        BigDecimal minx = x.subtract(val);
+        BigDecimal miny = y.subtract(val);
+        BigDecimal maxx = x.add(val);
+        BigDecimal maxy = y.add(val);
+        String extent = minx + "+" + miny + "+" + maxx + "+" + maxy;
+
+        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&zoomdir=-1&zoomsize=" + zoom + "&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext="+extent+"&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";
 //        rutaURL = "http://itasca.tesis:8080/cgi-bin/mapserv?mode=browse&layer="+cuadranteBarrioActual.getIdCuadrante().getCodigoCuadrante()+"&zoomdir="+zoom+"&zoomsize=2&map_web=+TEMPLATE+itasca_basic.html&imgxy=350.0+200.0&imgext=776209.96+9969945.73+779521.35+9971944.75&map=/var/lib/tomcat7/mapserver/apps/mapserv-demo/ROOT/itasca.map&program=/cgi-bin/mapserv&root=/mapserv-";
     }
 

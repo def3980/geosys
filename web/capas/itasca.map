@@ -2,8 +2,7 @@ MAP
   NAME ITASCA
   STATUS ON
   SIZE 700 400
-#  EXTENT  768356.63 9955855.26 790107.69 10004030.80
-  EXTENT -8777875.59 -61224.6 -8694054.52 12131.2
+  EXTENT 766384.90 9961663.24 784210.39 9995630.45
   UNITS METERS
   SHAPEPATH "data"
   IMAGECOLOR 255 255 255
@@ -57,7 +56,7 @@ MAP
       # change this value to match your setup
       WMS_ONLINERESOURCE "http://localhost.localdomain/mapserver_demos/itasca/index.html"
 
-      WMS_SRS "EPSG:3785"
+      WMS_SRS "EPSG:32717"
     END
   END
 
@@ -66,12 +65,12 @@ MAP
   #
  
  LAYER
-    NAME QuitoLinial
-    TYPE LINE
+    NAME MALLA_QUITO
+    TYPE POLYGON
     STATUS DEFAULT
-    DATA QuitoLinial
+    DATA MALLA_QUITO
 
-    CLASSITEM 'name'
+    CLASSITEM 'ID'
     CLASS
       EXPRESSION 'Itasca'
       STYLE
@@ -87,36 +86,4 @@ MAP
       END
     END
   END
-  
-
-  LAYER
-    NAME C6
-    TYPE POLYGON
-    STATUS OFF
-    DATA C6
-
-    CLASS
-      NAME 'Lakes & Rivers'
-      TEMPLATE "templates/lakespy2.html"
-      STYLE
-	OUTLINECOLOR 128 128 128
-        COLOR 49 117 185
-      END
-    END
-
-    HEADER "templates/lakespy2_header.html"
-    FOOTER "templates/lakespy2_footer.html"
-    
-    TOLERANCE 3
-
-    DUMP TRUE # allow GML export
-
-    METADATA
-      WMS_TITLE "Lakes and Rivers"
-      WMS_ABSTRACT "DLG lake and river polygons for Itasca County. See http://deli.dnr.state.mn.us/metadata/full/dlglkpy2.html for more information."
-      WMS_SRS "EPSG:3785"
-    END
-  END
-
-
 END # Map File
