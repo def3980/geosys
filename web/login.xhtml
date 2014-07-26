@@ -30,7 +30,7 @@
         </style>
         <h:form id="formRegister">			
             <div class="centrar">
-                <div class="div-contenedor">
+                <div class="div-contenedor" style="background: #FFF; opacity: 0.8;">
                     <center>
                         <span style="font-weight: bold; font-size: 12px;">GeoSys 2.0</span>
                     </center>
@@ -51,15 +51,21 @@
                                 <tr>
                                     <td colspan="2" style="text-align: center;">
                                         <p:commandButton value="Acceder" icon="ui-icon-unlocked"
-                                                         action="#{login.acceder()}" update="formRegister"/>
+                                                         action="#{login.acceder()}" update="formRegister" 
+                                                         style="margin-bottom: 10px;"/>
                                     </td>							
-                                </tr>							
+                                </tr>
                                 <tr>
                                     <td colspan="2">
                                         <p:messages id="messages">
                                             <p:effect type="fade" event="load" delay="3000" />
                                         </p:messages>
                                     </td>
+                                </tr>
+                                <tr class="div-contenedor" style="background: #5bc0de">
+                                    <td colspan="2" style="text-align: center; padding: 10px 0px 10px 0px;">
+                                        <h:link outcome="/externo/cuadranteBarrio.xhtml" value="Usuarios externos" style="color: #000; font-weight: bold;" />
+                                    </td>							
                                 </tr>
                             </tbody>
                         </table>

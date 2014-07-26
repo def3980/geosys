@@ -9,7 +9,12 @@
 	<title>#{empty pageTitle ? 'GeoSys 2.0' : pageTitle}</title>
 	<h:outputStylesheet name="css/bootstrap.css" />
 </h:head>
-<h:body>
+    <h:body style="background: url(/geosys/resources/images/Quito.jpg)
+            no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;">
 	<ui:insert name="main" />
 </h:body>
 </html>
