@@ -65,6 +65,29 @@ MAP
   #
  
  LAYER
+    NAME vias_prov_pichincha
+    TYPE LINE
+    STATUS DEFAULT
+    DATA vias_prov_pichincha
+
+    CLASSITEM 'FID_1'
+    CLASS
+      EXPRESSION 'Itasca'
+      STYLE
+        OUTLINECOLOR 128 128 128
+        #COLOR 225 225 185
+      END
+    END
+    CLASS # every other county in the state
+      EXPRESSION /./ 
+       STYLE 
+        OUTLINECOLOR 128 128 128
+        #COLOR 255 255 255
+      END
+    END
+  END
+	
+LAYER
     NAME MALLA_QUITO
     TYPE POLYGON
     STATUS DEFAULT
@@ -87,3 +110,4 @@ MAP
     END
   END
 END # Map File
+
